@@ -19,7 +19,7 @@ This program was written entirely in Python Language.
 </p>
 
 ## COPYRIGHT
-Copyright (C) 2023 by [**Firaol Mk**](https://github.com/firacil) and [**Kidus Asebe**](https://github.com/Kad-19) </br>
+Copyright (C) 2024 by [**Firaol Mk**](https://github.com/firacil) and [**Kidus Asebe**](https://github.com/Kad-19) </br>
 All rights reserved
 
  ## Description :
