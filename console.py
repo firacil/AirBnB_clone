@@ -84,12 +84,20 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 ins1 = [str(i) for key, i in storage.all().items()
-                         if type(i).__name__ == words[0]]
+                        if type(i).__name__ == words[0]]
             print(ins1)
 
         else:
             ins2 = [str(obj) for key, obj in storage.all().items()]
             print(ins2)
+
+    def do_update(self, args):
+        """
+            Updates an instance based on the class name and id
+            by adding or updating attribute
+            (save the change into the JSON file).
+            Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
+        """
 
     def do_EOF(self, arg):
         """EOF command to exit the program\n"""
