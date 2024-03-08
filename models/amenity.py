@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""contains the State class"""
+"""contains the Amenity class"""
 from models.base_model import BaseModel
 
 
-class State(BaseModel):
-    """Represents a state"""
+class Amenity(BaseModel):
+    """Represents an amenity"""
     name = ""
 
     def __init__(self, *args, **kwargs):
