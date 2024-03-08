@@ -51,6 +51,23 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     instance = storage.all()[key]
                     print(instance)
+    def do_all(self, arg):
+        """
+            Prints all string representation of all instances
+            based or not on the class name.
+        """
+        if arg != "":
+            words = arg.split(' ')
+            if words[0] not in storage.classes():
+                print("** class doesn't exist **")
+            else:
+                ins1 = [str(i) for key, i in storage.all().items()
+                         if type(i).__name__ == words[0]]
+            print(ins1)
+
+        else:
+            ins2 = [str(obj) for key, obj in storage.all().items()]
+            print(ins2)
 
     def do_EOF(self, arg):
         """EOF command to exit the program\n"""
