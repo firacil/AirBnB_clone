@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Module for the entry point of the command interpreter."""
+
 import cmd
 import re
 from models.base_model import BaseModel
@@ -179,6 +181,21 @@ class HBNBCommand(cmd.Cmd):
                                         command[0], command[2])
         return cmd.Cmd.precmd(self, command)
 
+    def do_count(self, arg):
+        """
+            retrieve the number of instances of class
+            <class name>.count()
+        """
+        args = arg.split(' ')
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            m = [
+                k for k in storage.all() if k.startswith(
+                    args[0] + '.')]
+            print(len(m))
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
