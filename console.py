@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Module for the entry point of the command interpreter."""
+
 import cmd
 import re
 from models.base_model import BaseModel
