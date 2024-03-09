@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 ins1 = [str(i) for key, i in storage.all().items()
                         if type(i).__name__ == words[0]]
-            print(ins1)
+                print(ins1)
 
         else:
             ins2 = [str(obj) for key, obj in storage.all().items()]
