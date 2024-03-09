@@ -20,13 +20,10 @@ class HBNBCommand(cmd.Cmd):
             Args:
                 arg
         """
-        if not arg or arg is None:
+        if arg == "" or arg is None:
             print("** class name missing **")
-            return
-
-        if arg not in storage.classes():
+        elif arg not in storage.classes():
             print("** class doesn't exist **")
-            return
         else:
             new_ins = storage.classes()[arg]()
             new_ins.save()
@@ -37,9 +34,8 @@ class HBNBCommand(cmd.Cmd):
              Prints the string representation of an instance
              based on the class name and id.
         """
-        if not args or args is None:
+        if args == "" or args is None:
             print("** class name missing **")
-            return
         else:
             words = args.split(' ')
             if words[0] not in storage.classes():
@@ -59,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             Deletes an instance based on the class name and
             id (save the change into the JSON file).
         """
-        if not args or args is None:
+        if args == "" or args is None:
             print("** class name missing **")
         else:
             words = args.split(' ')
