@@ -163,8 +163,7 @@ class HBNBCommand(cmd.Cmd):
 
     def _precmd(self, command):
         """Overrides the precmd method"""
-        reg_no_args = r"^(\w*)\.(\w+)(?:\(([^)]*)\))$"
-        match = re.search(reg_no_args, command)
+        match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", command)
 
         if not match:
             return command
