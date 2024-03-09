@@ -158,6 +158,27 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
+    def precmd(self, command):
+        """Overrides the precmd method"""
+        if command == "" or command is None:
+            return cmd.Cmd.precmd(self, command)
+        reg_no_args = r'\b(\w+\.\w+)\(\)'
+        match_no_args = re.search(reg_no_args, command)
+        reg_args = r'\b(\w+\.\w+)\(\S+\)'
+        match_args = re.search(reg_args, command)
+        if match_no_args:
+            command = command.replace(".", " ")
+            command = command.replace("(", "").replace(")", "")
+            command = command.split(" ")
+            command = "{} {}".format(command[1], command[0])
+        elif match_args:
+            command = command.replace(".", " ")
+            command = command.replace("(", " ").replace(")", " ")
+            command = command.split(" ")
+            command = "{} {} {}".format(command[1],
+                                        command[0], command[2])
+        return cmd.Cmd.precmd(self, command)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
