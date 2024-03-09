@@ -3,6 +3,7 @@
 
 import cmd
 import re
+import json
 from models.base_model import BaseModel
 from models import storage
 
@@ -185,7 +186,7 @@ class HBNBCommand(cmd.Cmd):
                 self.update_dict(classname, uid, match_dict.group(1))
                 return ""
             match_atdic = re.search(
-                    '^(?:"([^"]*)")?(?:, (.*))?$'. at_dic)
+                    '^(?:"([^"]*)")?(?:, (.*))?$', at_dic)
             if match_atdic:
                 at_and_value = (match_atdic.group(
                             1) or "") + (match_atdic.group(2) or "")
@@ -230,7 +231,7 @@ class HBNBCommand(cmd.Cmd):
                     if attribute in attributes:
                         value = attributes[attribute](value)
                     setattr(storage.all()[key], attribute, value)
-                storge.all()[key].save()
+                storage.all()[key].save()
 
 
 if __name__ == '__main__':
