@@ -156,26 +156,42 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-    def precmd(self, command):
+    def default(self, arg):
+        """Catch commands if nothing matches"""
+        self._precmd(arg)
+
+    def _precmd(self, command):
         """Overrides the precmd method"""
-        if command == "" or command is None:
-            return cmd.Cmd.precmd(self, command)
-        reg_no_args = r'\b(\w+\.\w+)\(\)'
-        match_no_args = re.search(reg_no_args, command)
-        reg_args = r'\b(\w+\.\w+)\(\S+\)'
-        match_args = re.search(reg_args, command)
-        if match_no_args:
-            command = command.replace(".", " ")
-            command = command.replace("(", "").replace(")", "")
-            command = command.split(" ")
-            command = "{} {}".format(command[1], command[0])
-        elif match_args:
-            command = command.replace(".", " ")
-            command = command.replace("(", " ").replace(")", " ")
-            command = command.split(" ")
-            command = "{} {} {}".format(command[1],
-                                        command[0], command[2])
-        return cmd.Cmd.precmd(self, command)
+        reg_no_args = r"^(\w*)\.(\w+)(?:\(([^)]*)\))$"
+        match = re.search(reg_no_args, command)
+
+        if not match:
+            return command
+        classname = match.group(1)
+        method = match.group(2)
+        args = match.group(3)
+        match_uid_args = re.search('^"([^"]*)"(?:, (.*))?$', args)
+        if match_uid_args:
+            uid = match_uid_args.group(1)
+            at_dic = match_uid_args.group(2)
+        else:
+            uid = args
+            at_dic = False
+
+        at_and_value = ""
+        if method == "update" and at_dic:
+            match_dict = re.search('^({.*})$', at_dic)
+            if match_dict:
+                self.update_dict(classname, uid, match_dict.group(1))
+                return ""
+            match_atdic = re.search(
+                    '^(?:"([^"]*)")?(?:, (.*))?$'. at_dic)
+            if match_atdic:
+                at_and_value = (match_atdic.group(
+                            1) or "") + (match_atdic.group(2) or "")
+        cm = method + " " + classname + " " + uid + " " + at_and_value
+        self.onecmd(cm)
+        return cm
 
     def do_count(self, arg):
         """
