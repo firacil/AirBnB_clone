@@ -72,6 +72,8 @@ class FileStorage:
             "City":
                      {"state_id": str,
                       "name": str},
+            "Amenity":
+                     {"name": str},
             "Place":
                      {"city_id": str,
                       "user_id": str,
