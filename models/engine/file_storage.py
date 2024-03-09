@@ -1,6 +1,8 @@
 #!/usr/bin/pythone3
 """contains the filestorage class"""
+import datetime
 import json
+import os
 
 
 class FileStorage:
@@ -52,3 +54,39 @@ class FileStorage:
                 FileStorage.__objects = objLoaded
         except FileNotFoundError:
             pass
+
+    def attributes(self):
+        """ Returns valid attributes and their type for all classname"""
+        attributes = {
+            "BaseModel":
+                     {"id": str,
+                      "created_at": datetime.datetime,
+                      "updated_at": datetime.datetime},
+            "User":
+                     {"email": str,
+                      "password": str,
+                      "first_name": str,
+                      "last_name": str},
+            "State":
+                     {"name": str},
+            "City":
+                     {"state_id": str,
+                      "name": str},
+            "Place":
+                     {"city_id": str,
+                      "user_id": str,
+                      "name": str,
+                      "description": str,
+                      "number_rooms": int,
+                      "number_bathrooms": int,
+                      "max_guest": int,
+                      "price_by_night": int,
+                      "latitude": float,
+                      "longitude": float,
+                      "amenity_ids": list},
+            "Review":
+                     {"place_id": str,
+                      "user_id": str,
+                      "text": str}
+        }
+        return attributes
