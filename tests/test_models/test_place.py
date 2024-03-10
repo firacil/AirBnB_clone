@@ -40,7 +40,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(place.number_rooms, 0)
 
     def test_number_bathrooms_attr(self):
-        """Test if Place has an attribute number_bathrooms, and ia an int == 0"""
+        """Test if Place has an attr number_bathrooms, and ia an int == 0"""
         place = Place()
         self.assertTrue(hasattr(place, "number_bathrooms"))
         self.assertEqual(place.number_bathrooms, 0)
