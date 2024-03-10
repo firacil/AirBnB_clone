@@ -28,7 +28,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(place.user_id, "")
 
     def test_description_attr(self):
-        """Test if Place has an attribute description, and is an empty string"""
+        """Test if Place has an attr description, and is an empty string"""
         place = Place()
         self.assertTrue(hasattr(place, "description"))
         self.assertEqual(place.description, "")
