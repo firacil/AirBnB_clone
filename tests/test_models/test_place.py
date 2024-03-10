@@ -45,6 +45,12 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "number_bathrooms"))
         self.assertEqual(place.number_bathrooms, 0)
 
+    def test_max_guest_attr(self):
+        """Test if Place has an attribute max_guest, and is an int == 0"""
+        place = Place()
+        self.assertTrue(hasattr(place, "max_guest"))
+        self.assertEqual(place.max_guest, 0)
+
     def test_name_attr(self):
         """Tests if Place has an attribute name, and is an empty string"""
         place = Place()
