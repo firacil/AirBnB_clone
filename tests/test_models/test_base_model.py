@@ -17,13 +17,33 @@ class TestBaseModel(unittest.Testcase):
         """ sets up test method"""
         pass
 
-    def no_args_init_(self):
+    def tearDown(self):
+        """tears down test Methods"""
+        self.Storagereset()
+        pass
+
+    def test_instantitation(self):
+        """tests instantation of BaseModel class"""
+        bm = BaseModel()
+        self.assertEqual(str(type(bm)), "<class 'models.base_model..BaseModel'>")
+        self.assertIsInstance(bm, BaseModel)
+        self.assertTrue(issubclass(type(bm), BaseModel))
+
+    def test_no_args_init_(self):
         """ Test when __init__ with no arguments"""
         self.Storagereset()
         with self.assertRaises(TypeError) as e:
             BaseModel.__init__()
             m = "__init__() missing 1 required positional argument: 'self'"
             self.assertEqual(str(e.exception), m)
+
+    def test_attributes(self):
+        """tests attributes vaalue for instance of BaseModel class"""
+        attributes = storage.attributes()["BaseModel"]
+        bm = BaseModel()
+        for k, v in attributes.items():
+            self.assertTrue(hasattr(bm, k))
+            self.assertEqual(type(getattr(bm, k, None)), v)
 
     def test_id(self):
         """Test for unique uuid"""
@@ -67,6 +87,45 @@ class TestBaseModel(unittest.Testcase):
         self.assertEqual(dic["updated_at"], bm.updated_at.isoformat())
         self.assertEqual(dic["name"], bm.name)
         self.assertEqual(dic["age"], bm.age)
+
+    def test_dict_no_args(self):
+        """test to_dict() with no arguments"""
+        self.Storagereset()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.to_dict()
+        m = "to_dict() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), m)
+
+    def test_to_dict_excess_args(self):
+        """tests to to_dict() with too many arguments"""
+        self.Storagereset()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.to_dict(self, 98)
+        m = "to_dict() takes 1 positional argument but 2 were given"
+        self.assertEqual(str(e.exception), m)
+
+    def test_instantiation(self):
+        """tests instantiation **kwargs"""
+
+        bm = BaseModel()
+        bm.name = "Firaol"
+        bm.my_number = 89
+        bm_json = bm.to_dict()
+        bm_new = BaseModel(**bm_json)
+        self.assertEqual(bm_new.to_dict(), bm.to_dict())
+
+    def test_instantiation_kwargs(self):
+        """tests instantiation with **kwargs from dict"""
+        d = {"__class__": "BaseModel",
+             "updated_at":
+             datetime(2050, 12, 30, 23, 59, 59, 123456).isoformat(),
+             "created_at": datetime.now().isoformat(),
+             "id": uuid.uuid4(),
+             "var": "foobar",
+             "int": 108,
+             "float": 3.14}
+        bm = BaseModel(**d)
+        self.assertEqual(bm.to_dict(), d)
 
     def Storagereset(self):
         """ Resets Filestorage data."""
