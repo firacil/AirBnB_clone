@@ -27,6 +27,12 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(review, "user_id"))
         self.assertEqual(review.user_id, "")
 
+    def test_text_attr(self):
+        """test if Review has attr text, and is an empty string"""
+        review = Review()
+        self.assertTrue(hasattr(review, "text"))
+        self.assertEqual(review.text, "")
+
     def test_to_dict(self):
         """Test to_dict method"""
         obj = Review()
