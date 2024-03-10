@@ -33,6 +33,12 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "description"))
         self.assertEqual(place.description, "")
 
+    def test_number_rooms_attr(self):
+        """Test if Place has an attribute number_rooms, and is an empty string"""
+        place = Place()
+        self.assertTrue(hasattr(place, "number_rooms"))
+        self.assertEqual(place.number_rooms, 0)
+
     def test_name_attr(self):
         """Tests if Place has an attribute name, and is an empty string"""
         place = Place()
