@@ -127,6 +127,36 @@ class TestBaseModel(unittest.Testcase):
         bm = BaseModel(**d)
         self.assertEqual(bm.to_dict(), d)
 
+    def test_2save(self):
+        """tests that storage.save() is called from save()."""
+        self.Storagereset()
+        bm = BaseModel()
+        bm.save()
+        key = "{}.{}".format(type(bm).__name__, bm.id)
+        d = {key: bm.to_dict()}
+        self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
+        with open(FileStorage._FileStorage__file_path,
+                "r", encoding="utf-8") as f:
+            self.assertEqual(len(f.read()), len(json.dumps(d)))
+            f.seek(0)
+            self.assertEqual(json.load(f), d)
+
+    def test_save_noargs(self):
+        """ test save() with no argument"""
+        self.resetStorage()
+        with self.asserRaises(TypeError) as e:
+            BaseModel.save()
+        m = "save() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), msg)
+
+    def test_save_exargs(self):
+        """ tests save() with too many arguments"""
+        self.Storagereset()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.save(self, 98)
+        m = "save() takes 1 positional argument but 2 were given"
+        self.assertEqual(str(e.exception), m)
+
     def Storagereset(self):
         """ Resets Filestorage data."""
         FileStorage._FileStorage__objects = {}
