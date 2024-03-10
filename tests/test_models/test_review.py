@@ -15,6 +15,12 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(review, "created_at"))
         self.assertTrue(hasattr(review, "updated_at"))
 
+    def test_place_id_attr(self):
+        """Test if Review has attr place_id, and is an empty string"""
+        review = Review()
+        self.assertTrue(hasattr(review, "place_id"))
+        self.assertEqual(review.place_id, "")
+
     def test_to_dict(self):
         """Test to_dict method"""
         obj = Review()
