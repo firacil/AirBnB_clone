@@ -21,6 +21,12 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "city_id"))
         self.assertEqual(place.city_id, "")
 
+    def test_user_id_attr(self):
+        """Test if Place has an attribute user_id, and is an empty string"""
+        place = Place ()
+        self.assertTrue(hasattr(place, "user_id"))
+        self.assertEqual(place.user_id, "")
+
     def test_name_attr(self):
         """Tests if Place has an attribute name, and is an empty string"""
         place = Place()
