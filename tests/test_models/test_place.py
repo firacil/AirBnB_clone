@@ -57,6 +57,11 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "price_by_night"))
         self.assertEqual(place.price_by_night, 0)
 
+    def test_latitude_attr(self):
+        """Test if Place has an attribute latitiude, and is a float == 0.0"""
+        place = Place()
+        self.assertTrue(hasattr(place, "latitude"))
+        self.assertEqual(place.latitude, 0.0)
 
     def test_name_attr(self):
         """Tests if Place has an attribute name, and is an empty string"""
