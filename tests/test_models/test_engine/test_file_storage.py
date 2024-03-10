@@ -14,7 +14,7 @@ import os
 
 class TestFileStorage(unittest.TestCase):
     """test case for FileStorage class"""
-    
+
     def setUp(self):
         """sets up test methods"""
         pass
