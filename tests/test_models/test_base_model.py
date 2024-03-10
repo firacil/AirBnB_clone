@@ -5,12 +5,13 @@ import unittest
 import uuid
 import json
 import os
+import re
 import time
 from models.engine.file_storage import FileStorage
 from datetime import datetime
 from models.base_model import BaseModel
 
-class TestBaseModel(unittest.Testcase):
+class TestBaseModel(unittest.TestCase):
     """ Testing the User Class"""
     
     def setUp(self):
@@ -25,7 +26,7 @@ class TestBaseModel(unittest.Testcase):
     def test_instantitation(self):
         """tests instantation of BaseModel class"""
         bm = BaseModel()
-        self.assertEqual(str(type(bm)), "<class 'models.base_model..BaseModel'>")
+        self.assertEqual(str(type(bm)), "<class 'models.base_model.BaseModel'>")
         self.assertIsInstance(bm, BaseModel)
         self.assertTrue(issubclass(type(bm), BaseModel))
 
@@ -55,11 +56,11 @@ class TestBaseModel(unittest.Testcase):
         bm = BaseModel()
         reg = re.compile(r"^\[(.*)\] \((.*)\) (.*)$")
         res = reg.match(str(bm))
-        self.assertISNotNone(res)
+        self.assertIsNotNone(res)
         self.assertEqual(res.group(1), "BaseModel")
         self.assertEqual(res.group(2), bm.id)
         s = res.group(3)
-        s = re.sub(r"(datetime\.datetime\([^)]*))", "'\\1'", s)
+        s = re.sub(r"(datetime\.datetime\([^)]*\))", "'\\1'", s)
         d = json.loads(s.replace("'", '"'))
         dd = bm.__dict__.copy()
         dd["created_at"] = repr(dd["created_at"])
@@ -69,8 +70,8 @@ class TestBaseModel(unittest.Testcase):
     def test_save(self):
         """ tests method save()"""
         bm = BaseModel()
-        date_now = datetime.now()
         time.sleep(0.5)
+        date_now = datetime.now()
         bm.save()
         d = bm.updated_at - date_now
         self.assertTrue(abs(d.total_seconds()) < 0.01)
@@ -143,11 +144,11 @@ class TestBaseModel(unittest.Testcase):
 
     def test_save_noargs(self):
         """ test save() with no argument"""
-        self.resetStorage()
-        with self.asserRaises(TypeError) as e:
+        self.Storagereset()
+        with self.assertRaises(TypeError) as e:
             BaseModel.save()
         m = "save() missing 1 required positional argument: 'self'"
-        self.assertEqual(str(e.exception), msg)
+        self.assertEqual(str(e.exception), m)
 
     def test_save_exargs(self):
         """ tests save() with too many arguments"""

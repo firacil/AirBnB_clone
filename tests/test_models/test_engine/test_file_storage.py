@@ -50,7 +50,7 @@ class TestFileStorage(unittest.TestCase):
         storage.new(o)
         key = "{}.{}".format(type(o).__name__, o.id)
         self.assertTrue(key in storage.all())
-        slef.assertEqual(storage.all()[key], o)
+        self.assertEqual(storage.all()[key], o)
 
     def test_all_base_model(self):
         """tests all() model for BaseModel."""
