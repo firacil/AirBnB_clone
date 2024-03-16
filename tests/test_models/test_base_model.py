@@ -11,9 +11,10 @@ from models.engine.file_storage import FileStorage
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
     """ Testing the User Class"""
-    
+
     def setUp(self):
         """ sets up test method"""
         pass
@@ -26,7 +27,8 @@ class TestBaseModel(unittest.TestCase):
     def test_instantitation(self):
         """tests instantation of BaseModel class"""
         bm = BaseModel()
-        self.assertEqual(str(type(bm)), "<class 'models.base_model.BaseModel'>")
+        self.assertEqual(str(type(bm)),
+                         "<class 'models.base_model.BaseModel'>")
         self.assertIsInstance(bm, BaseModel)
         self.assertTrue(issubclass(type(bm), BaseModel))
 
@@ -137,7 +139,7 @@ class TestBaseModel(unittest.TestCase):
         d = {key: bm.to_dict()}
         self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
         with open(FileStorage._FileStorage__file_path,
-                "r", encoding="utf-8") as f:
+                  "r", encoding="utf-8") as f:
             self.assertEqual(len(f.read()), len(json.dumps(d)))
             f.seek(0)
             self.assertEqual(json.load(f), d)
