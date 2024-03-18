@@ -1,6 +1,6 @@
 .filters {
 
-	color: white;
+	background-color: white;
 	height: 70;
 	width: 100%;
 	border: 1px solid #DDDDDD;
@@ -17,14 +17,10 @@
 	width: 20%;
 	border: none;
 	border-radius: 4px;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 30px;
-	opacity: 1;
-	transition: opacity 0.3s;
+	float: right;
+	margin: 11px 30px;
 }
 
 .searches:hover {
-	opacity: 0.9;
+	opacity: .9;
 }
