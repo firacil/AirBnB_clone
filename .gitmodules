@@ -1,6 +1,0 @@
-[submodule "web_static/web_static/W3C-validator"]
-	path = web_static/web_static/W3C-validator
-	url = https://github.com/holbertonschool/W3C-validator.git
-[submodule "web_static/W3C-validator"]
-	path = web_static/W3C-validator
-	url = https://github.com/holbertonschool/W3C-validator.git
